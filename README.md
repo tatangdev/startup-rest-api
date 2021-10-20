@@ -8,28 +8,56 @@ The file explorer is accessible using the button in left corner of the navigatio
 
 ### Users
 
-| Column Name | Data Type | Default |
-| --- | ----------- | --- |
-| Header | Title | null |
-| Paragraph | Text | null |
+| Column Name       | Data Type |
+| ----------------- | --------- |
+| id                | int       |
+| name              | varchar   |
+| occupation        | varchar   |
+| email             | varchar   |
+| password_hash     | varchar   |
+| avatar_file_name  | varchar   |
+| role              | varchar   |
+| token             | varchar   |
+| created_at        | datetime  |
+| updated_at        | datetime  |
 
 ### Campaigns
 
-| Column Name | Data Type | Default |
-| --- | ----------- | --- |
-| Header | Title | null |
-| Paragraph | Text | null |
+| Column Name       | Data Type |
+| ----------------- | --------- |
+| id                | int       |
+| user_id           | int       |
+| name              | varchar   |
+| short_description | varchar   |
+| description       | text      |
+| goal_amount       | int       |
+| current_amount    | int       |
+| backer_count      | int       |
+| perks             | text      |
+| slug              | varchar   |
+| created_at        | datetime  |
+| updated_at        | datetime  |
 
 ### Campaign Images
 
-| Column Name | Data Type | Default |
-| --- | ----------- | --- |
-| Header | Title | null |
-| Paragraph | Text | null |
+| Column Name       | Data Type |
+| ----------------- | --------- |
+| id                | int       |
+| campaign_id       | int       |
+| file_name         | varchar   |
+| is_primary        | boolean   |
+| created_at        | datetime  |
+| updated_at        | datetime  |
 
 ### Transactions
 
-| Column Name | Data Type | Default |
-| --- | ----------- | --- |
-| Header | Title | null |
-| Paragraph | Text | null |
+| Column Name       | Data Type |
+| ----------------- | --------- |
+| id                | int       |
+| campaign_id       | int       |
+| user_id           | int       |
+| amount            | int   |
+| status            | varchar   |
+| code              | varchar   |
+| created_at        | datetime  |
+| updated_at        | datetime  |
