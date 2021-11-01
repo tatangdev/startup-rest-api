@@ -17,10 +17,14 @@ func main() {
 	}
 
 	userRepository := user.NewRepository(db)
+	userService := user.NewService(userRepository)
 
-	user := user.User{
-		Name: "Test simpan",
-	}
+	userInput := user.RegisterUserInput{}
+	userInput.Name = "sri andeani"
+	userInput.Email = "sri@mail.com"
+	userInput.Occupation = "ui/ux designer"
+	userInput.Password = "password"
 
-	userRepository.Save(user)
+	userService.RegisterUser(userInput)
+
 }
