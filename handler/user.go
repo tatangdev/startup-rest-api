@@ -67,6 +67,44 @@ func (h *userHandler) Login(c *gin.Context) {
 	}
 
 	formatter := user.FormatUser(loggedinUser, "tokentokentokentokentoken")
+
 	response := helper.ApiResponse("Succesfully loggedin", http.StatusOK, "success", formatter)
+
 	c.JSON(http.StatusOK, response)
+}
+
+func (h *userHandler) CheckIsEmailExist(c *gin.Context) {
+	var input user.CheckEmailInput
+
+	err := c.ShouldBindJSON(&input)
+	if err != nil {
+		errors := helper.FormatValidationError(err)
+		errorMessage := gin.H{"error": errors}
+
+		response := helper.ApiResponse("Email checking failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	isEmailExist, err := h.userService.IsEmailExist(input)
+	if err != nil {
+		errorMessage := gin.H{"error": "Server error"}
+
+		response := helper.ApiResponse("Email checking failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	data := gin.H{
+		"is_exist": isEmailExist,
+	}
+
+	metaMessage := "Email is available"
+
+	if isEmailExist {
+		metaMessage = "Email already used"
+	}
+
+	response := helper.ApiResponse(metaMessage, http.StatusOK, "success", data)
+	c.JSON(http.StatusUnprocessableEntity, response)
 }
